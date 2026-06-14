@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Sankey.png" alt="sankey logo" width="180">
+  <img src="Sankey.png" alt="sankeyplot logo" width="180">
 </p>
 
 <p align="center">
@@ -9,9 +9,9 @@
   <img src="https://img.shields.io/badge/render-Plotly-3f4f75?logo=plotly&logoColor=white" alt="Plotly">
 </p>
 
-# sankey &mdash; Create Flow Diagrams for Data Distribution Analysis
+# sankeyplot &mdash; Create Flow Diagrams for Data Distribution Analysis
 
-**`sankey`** is a Python package for producing publication-ready Sankey (alluvial)
+**`sankeyplot`** is a Python package for producing publication-ready Sankey (alluvial)
 diagrams styled to match the visual conventions of leading scientific journals
 (*Nature*, *Cell*, *Science*).  It provides a unified high-level API that accepts
 three common data representations (long-format edge tables, wide-format
@@ -40,7 +40,7 @@ Plotly figure exportable to HTML, PNG, or PDF.
   - [2. Wide-format DataFrame](#2-wide-format-dataframe)
   - [3. Capacity dictionary](#3-capacity-dictionary)
 - [API Reference](#api-reference)
-  - [`sankey()`](#sankey)
+  - [`sankeyplot()`](#sankeyplot)
   - [`from_wide()`](#from_wide)
   - [`from_capacity()`](#from_capacity)
   - [`load_preset()`](#load_preset)
@@ -70,21 +70,14 @@ opacity layering, reserved treatment of residual flows, and clean sans-serif
 typography&mdash;that are tedious to reproduce manually in general-purpose
 plotting libraries.
 
-**`sankey`** encapsulates these design rules in a set of versioned *presets* so
+**`sankeyplot`** encapsulates these design rules in a set of versioned *presets* so
 that researchers can focus on their data rather than on fine-tuning plot
 aesthetics.
 
 ## Installation
 
 ```bash
-pip install sankey
-```
-
-For optional Matplotlib-backed colormap support and the development toolchain:
-
-```bash
-pip install sankey[colormaps]
-pip install sankey[dev]
+pip install sankeyplot
 ```
 
 **Requirements:** Python &ge; 3.10, NumPy &ge; 1.24, Pandas &ge; 2.0, Plotly &ge; 5.14.
@@ -101,7 +94,7 @@ weights:
 
 ```python
 import pandas as pd
-from sankey import sankey
+from sankeyplot import sankey
 
 nodes = pd.DataFrame({
     "name":  ["Amp", "Mut", "Del", "Path_A", "Path_B", "Path_C", "Cancer"],
@@ -117,7 +110,7 @@ edges = pd.DataFrame({
 
 fig = sankey((edges, nodes), preset="nature", height=500, width=1400,
              title="Long-format example")
-fig.write_html("sankey.html")
+fig.write_html("sankeyplot.html")
 ```
 
 ### 2. Wide-format DataFrame
@@ -126,7 +119,7 @@ Each row is an observation; columns encode the successive categorical layers:
 
 ```python
 import pandas as pd
-from sankey import sankey
+from sankeyplot import sankey
 
 df = pd.DataFrame({
     "Input":   ["Amp", "Amp", "Amp", "Mut", "Mut", "Mut", "Del", "Del"],
@@ -135,7 +128,7 @@ df = pd.DataFrame({
 })
 
 fig = sankey(df, layer_cols=["Input", "Process", "Outcome"], preset="cell")
-fig.write_html("sankey_cell.html")
+fig.write_html("sankeyplot_cell.html")
 ```
 
 ### 3. Capacity dictionary
@@ -144,7 +137,7 @@ Specify the total flow through each node; flows between layers are inferred
 via the Sinkhorn&ndash;Knopp algorithm:
 
 ```python
-from sankey import sankey
+from sankeyplot import sankey
 
 caps = {
     "Inputs":  [550, 270, 180],
@@ -153,7 +146,7 @@ caps = {
 }
 
 fig = sankey(caps, preset="nature", seed=0)
-fig.write_html("sankey_capacity.html")
+fig.write_html("sankeyplot_capacity.html")
 ```
 
 ## API Reference
@@ -302,7 +295,7 @@ Pass a dictionary conforming to the `Scheme` TypedDict directly as the `preset`
 argument, or register it for reuse:
 
 ```python
-from sankey import sankey, register_preset
+from sankeyplot import sankey, register_preset
 
 register_preset("my_lab", {
     "main_palette":   ["#2C3E50", "#E74C3C", "#3498DB", "#2ECC71", "#F39C12", "#9B59B6"],
@@ -339,9 +332,9 @@ The package bundles several perceptually-informed colour palettes available as
 standalone functions:
 
 ```python
-from sankey import palette_nature, palette_cell, palette_science
-from sankey import palette_lancet, palette_colorbrewer, palette_viridis, palette_batlow
-from sankey import palette_custom
+from sankeyplot import palette_nature, palette_cell, palette_science
+from sankeyplot import palette_lancet, palette_colorbrewer, palette_viridis, palette_batlow
+from sankeyplot import palette_custom
 
 # Static presets
 nature_colors  = palette_nature()          # → 6-hex list
@@ -359,7 +352,7 @@ custom    = palette_custom(["#FF0000", "#00FF00", "#0000FF"])
 ### Gradient Utilities
 
 ```python
-from sankey._colors import gradient_sequential, gradient_diverging, layer_gradient
+from sankeyplot._colors import gradient_sequential, gradient_diverging, layer_gradient
 
 sequential = gradient_sequential("#7B1515", "#F5D5D5", n=6)
 diverging  = gradient_diverging("#313695", "#FFFFBF", "#A50026", n=11)
@@ -369,8 +362,8 @@ layer      = layer_gradient("#4A6FAF", n=5, lighten=0.6)
 ## Architecture
 
 ```
-sankey/
-├── __init__.py       # Public API: sankey() entry point
+sankeyplot/
+├── __init__.py       # Public API: sankeyplot() entry point
 ├── _typing.py        # Type aliases: NodeTable, LinkTable, Scheme, ColorRule
 ├── _data.py          # Data ingestion: from_wide, from_capacity, validators
 ├── _layout.py        # Layout engine: auto_x, compute_y, compute_layout
@@ -403,7 +396,7 @@ tests/
 ├── test_colors.py       # palette functions, hex_to_rgba, gradients
 ├── test_presets.py      # load_preset, list_presets, register_preset
 ├── test_render.py       # render(), node/link colouring, annotations
-├── test_integration.py  # sankey() full pipeline (all 3 input formats)
+├── test_integration.py  # sankeyplot() full pipeline (all 3 input formats)
 └── conftest.py          # Shared fixtures
 ```
 

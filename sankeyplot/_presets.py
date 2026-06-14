@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sankey._typing import PresetRegistry, Scheme
+from sankeyplot._typing import PresetRegistry, Scheme
 
 PRESETS: PresetRegistry = {
     "nature": {

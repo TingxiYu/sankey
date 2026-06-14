@@ -1,7 +1,7 @@
 """Sankey — Publication-quality Sankey diagrams for scientific journals.
 
 Usage:
-    from sankey import sankey, load_preset
+    from sankeyplot import sankey, load_preset
 
     # From long-format data
     fig = sankey((edges, nodes), preset="nature")
@@ -15,8 +15,8 @@ Usage:
 
 from __future__ import annotations
 
-from sankey._presets import load_preset, list_presets, register_preset
-from sankey._colors import (
+from sankeyplot._presets import load_preset, list_presets, register_preset
+from sankeyplot._colors import (
     palette_nature,
     palette_cell,
     palette_science,
@@ -26,9 +26,9 @@ from sankey._colors import (
     palette_batlow,
     palette_custom,
 )
-from sankey._data import from_wide, from_capacity
-from sankey._layout import compute_layout as _compute_layout
-from sankey._render import render as _render
+from sankeyplot._data import from_wide, from_capacity
+from sankeyplot._layout import compute_layout as _compute_layout
+from sankeyplot._render import render as _render
 
 
 def sankey(

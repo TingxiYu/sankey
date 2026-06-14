@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import plotly.graph_objects as go
 
-from sankey._colors import hex_to_rgba, _apply_color_rules
-from sankey._typing import Scheme
+from sankeyplot._colors import hex_to_rgba, _apply_color_rules
+from sankeyplot._typing import Scheme
 
 
 def _build_node_colors(nodes, scheme: Scheme) -> list[str]:
