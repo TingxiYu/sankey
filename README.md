@@ -18,6 +18,7 @@ three common data representations (long-format edge tables, wide-format
 observational DataFrames, and capacity dictionaries), computes a flexible
 layout, applies journal-specific color schemes, and renders an interactive
 Plotly figure exportable to HTML, PNG, or PDF.
+
 ---
 
 ![Sankeyplot](./Figure/sankey_cell.png)
