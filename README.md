@@ -44,7 +44,7 @@ Plotly figure exportable to HTML, PNG, or PDF.
   - [2. Wide-format DataFrame](#2-wide-format-dataframe)
   - [3. Capacity dictionary](#3-capacity-dictionary)
 - [API Reference](#api-reference)
-  - [`sankeyplot()`](#sankeyplot)
+  - [`sankey()`](#sankeyplot)
   - [`from_wide()`](#from_wide)
   - [`from_capacity()`](#from_capacity)
   - [`load_preset()`](#load_preset)
